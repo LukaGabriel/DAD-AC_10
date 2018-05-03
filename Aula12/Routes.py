@@ -1,14 +1,23 @@
+#Alunos
 from Alunos.Services.ListarAlunos import ListarAlunos
 from Alunos.Services.ConsultarPorRa import ConsultarPorRa
 from Alunos.Services.CadastrarAluno import CadastrarAluno
 from Alunos.Services.AlterarAluno import AlterarAluno
 from Alunos.Services.InativarAluno import InativarAluno
-
+#Professores
 from Professores.Services.ListarProfessores import ListarProfessores
 from Professores.Services.ConsultarPorRaP import ConsultarPorRaP
 from Professores.Services.CadastrarProfessor import CadastrarProfessor
 from Professores.Services.AlterarProfessor import AlterarProfessor
 from Professores.Services.InativarProfessor import InativarProfessor
+#Mensagens
+from Mensagens.Services.EnviarMensagem import EnviarMensagem
+from Mensagens.Services.ListarMensagensRecebidas import ListarMensagensRecebidas
+from Mensagens.Services.ListarMensagensEnviadas import ListarMensagensEnviadas
+from Mensagens.Services.ResopnderMensagem import ResponderMensagem
+from Mensagens.Services.LerMensagem import LerMensagem
+from Mensagens.Services.ArquivarMensagem import ArquivarMensagem
+from Mensagens.Services.ExcluirMensagem import ExcluirMensagem
 
 from flask import jsonify, request
 from Server import app
@@ -48,43 +57,5 @@ def AlterarAlunoRota():
 def InvalidarAlunoRota(ra):
     response['Status'] = 'Sucesso'
     response['Dados'] = InativarAluno(ra)
-    response['Mensagem'] = 'Inativar Aluno'
-    return jsonify(response)
-
-
-@app.route('/professores', methods = ['GET'])
-def ListarProfessoresRota():
-    response['Status'] = 'Sucesso'
-    response['Dados'] = ListarProfessores()
-    response['Mensagem'] = 'Lista de professores cadastrados'
-    return jsonify(response)
-
-@app.route('/professores/<ra>', methods = ['GET'])
-def ConsultarPorRaPRota(ra):
-    response['Status'] = 'Sucesso'
-    response['Dados'] = ConsultarPorRa(ra)
-    response['Mensagem'] = 'Lista de professores consultada'
-    return jsonify(response)
-
-@app.route('/professores', methods = ['POST'])
-def CadastrarProfessorRota():
-    dados = request.get_json()
-    response['Status'] = 'Sucesso'
-    response['Dados'] = CadastrarProfessor(dados)
-    response['Mensagem'] = 'Professor Cadastrado'
-    return jsonify(response)
-
-@app.route('/professores', methods = ['PUT'])
-def AlterarProfessorRota():
-    dados = request.get_json()
-    response['Status'] = 'Sucesso'
-    response['Dados'] = AlterarProfessor(dados)
-    response['Mensagem'] = 'Alterar Professor'
-    return jsonify(response)
-
-@app.route('/professores/<ra>', methods = ['DELETE'])
-def InvalidarProfessorRota(ra):
-    response['Status'] = 'Sucesso'
-    response['Dados'] = InativarProfessor(ra)
     response['Mensagem'] = 'Inativar Aluno'
     return jsonify(response)
